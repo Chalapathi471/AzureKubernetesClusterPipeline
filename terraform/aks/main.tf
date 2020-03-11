@@ -28,6 +28,13 @@ resource "azurerm_kubernetes_cluster" "terraform-k8s" {
     vm_size         = "Standard_DS1_v2"
   }
 
+  addon_profile {
+    # Enable virtual node (ACI connector) for Linux
+    aci_connector_linux {
+      enabled     = true
+    }
+  }
+
   service_principal {
     client_id     = var.client_id
     client_secret = var.client_secret
