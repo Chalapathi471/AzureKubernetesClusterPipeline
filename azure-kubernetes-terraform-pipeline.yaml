@@ -17,7 +17,6 @@ steps:
   inputs:
     command: 'init'
     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/aks'
-    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
     backendType: 'azurerm'
     backendServiceArm: 'ARM-Service'
     ensureBackend: true
@@ -26,3 +25,10 @@ steps:
     backendAzureRmStorageAccountName: 'aksterraformbackend'
     backendAzureRmContainerName: 'terraform-state'
     backendAzureRmKey: 'aks-terraform-state'
+
+- task: TerraformCLI@0
+  inputs:
+    command: 'apply'
+    workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/aks'
+    environmentServiceName: 'ARM-Service'
+    commandOptions: '-var client_id=$(client_id) -var client_secret=$(client_secret) -var ssh_public_key=$(publickey.secureFilePath)'
