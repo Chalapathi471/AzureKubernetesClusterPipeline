@@ -6,7 +6,6 @@ provider "azurerm" {
 provider "helm" {
   kubernetes {
     host     = "${azurerm_kubernetes_cluster.terraform-k8s.kube_config.0.host}"
-    kube_config = "${azurerm_kubernetes_cluster.terraform-k8s.kube_config.0.kube_config}"
     client_key             = "${base64decode(azurerm_kubernetes_cluster.terraform-k8s.kube_config.0.client_key)}"
     client_certificate     = "${base64decode(azurerm_kubernetes_cluster.terraform-k8s.kube_config.0.client_certificate)}"
     cluster_ca_certificate = "${base64decode(azurerm_kubernetes_cluster.terraform-k8s.kube_config.0.cluster_ca_certificate)}"
