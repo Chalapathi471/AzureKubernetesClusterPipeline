@@ -145,9 +145,9 @@ resource "azurerm_kubernetes_cluster" "terraform-k8s" {
       enabled                    = true
       log_analytics_workspace_id = azurerm_log_analytics_workspace.test.id
     }
-    # http_application_routing{
-    #   enabled = "true"
-    # }
+    http_application_routing{
+      enabled = "true"
+    }
   }
 
   service_principal {
@@ -168,16 +168,16 @@ resource "azurerm_kubernetes_cluster" "terraform-k8s" {
   }
 }
 
-resource "helm_release" "ingress" {
-    name      = "ingress"
-    chart     = "stable/nginx-ingress"
-    namespace = "kube-system"
+# resource "helm_release" "ingress" {
+#     name      = "ingress"
+#     chart     = "stable/nginx-ingress"
+#     namespace = "kube-system"
 
-    set {
-        name  = "rbac.create"
-        value = "true"
-    }
-}
+#     set {
+#         name  = "rbac.create"
+#         value = "true"
+#     }
+# }
 
 terraform {
   backend "azurerm" {
